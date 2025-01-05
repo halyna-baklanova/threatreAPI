@@ -1,3 +1,78 @@
+from django.conf import settings
 from django.db import models
 
-# Create your models here.
+
+class Actor(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+
+class Genre(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Play(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    actors = models.ManyToManyField(Actor)
+    genres = models.ManyToManyField(Genre)
+
+    def __str__(self):
+        return self.title
+
+
+class TheatreHall(models.Model):
+    name = models.CharField(max_length=255)
+    rows = models.IntegerField()
+    seats_in_row = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+
+class Reservation(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.user.username
+
+
+class Perfomance(models.Model):
+    play = models.ForeignKey(Play, on_delete=models.CASCADE,)
+    theatre_hall = models.ForeignKey(
+        TheatreHall,
+        on_delete=models.CASCADE,
+        related_name="perfomances",
+    )
+    show_time = models.DateTimeField()
+
+    def __str__(self):
+        return self.play.title
+
+
+class Ticket(models.Model):
+    rows = models.IntegerField()
+    seat = models.IntegerField()
+    perfomance = models.ForeignKey(
+        Perfomance,
+        on_delete=models.CASCADE,
+        related_name="tickets",
+    )
+    reservation = models.ForeignKey(
+        Reservation,
+        on_delete=models.CASCADE,
+        related_name="tickets",
+    )
+
+    def __str__(self):
+        return self.perfomance.title
