@@ -8,13 +8,12 @@ from theatre.models import (
     Ticket,
     Reservation,
     Performance
-
 )
 
-admin.register(Play)
-admin.register(Performance)
-admin.register(Actor)
-admin.register(TheatreHall)
-admin.register(Genre)
-admin.register(Ticket)
-admin.register(Reservation)
+admin.site.register(Play)
+admin.site.register(Performance)
+admin.site.register(Actor)
+admin.site.register(TheatreHall)
+admin.site.register(Genre)
+admin.site.register(Ticket)
+admin.site.register(Reservation)
