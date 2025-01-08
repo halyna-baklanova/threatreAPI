@@ -37,17 +37,6 @@ class TheatreHall(models.Model):
         return self.name
 
 
-class Reservation(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-
-    def __str__(self):
-        return self.user.username
-
-
 class Performance(models.Model):
     play = models.ForeignKey(Play, on_delete=models.CASCADE,)
     theatre_hall = models.ForeignKey(
@@ -59,6 +48,17 @@ class Performance(models.Model):
 
     def __str__(self):
         return self.play.title
+
+
+class Reservation(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.user.username
 
 
 class Ticket(models.Model):
