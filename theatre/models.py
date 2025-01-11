@@ -9,7 +9,7 @@ from django.contrib.auth.models import AbstractUser
 
 def actor_photo_path(instance: "Actor", filename: str) -> pathlib.Path:
     extension = pathlib.Path(filename).suffix
-    filename = f"{slugify(instance.title)}-{uuid.uuid4()}" + extension
+    filename = f"{slugify(instance.last_name)}-{uuid.uuid4()}" + extension
     return pathlib.Path("uploads/actors/") / pathlib.Path(filename)
 
 class Actor(models.Model):

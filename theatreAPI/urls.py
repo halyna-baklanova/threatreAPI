@@ -16,8 +16,9 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.conf import settings
 from django.urls import path, include
-from rest_framework.authtoken import views
+from django.conf.urls.static import static
 
 from user.views import CreateUserView, LoginUserView, ManageUserView
 
@@ -26,6 +27,5 @@ urlpatterns = [
     path("theatre/", include("theatre.urls", namespace="theatre")),
     path("user/register/", CreateUserView.as_view(), name="user-create"),
     path("user/login/", LoginUserView.as_view(), name="token"),
-    # path("user/login/", LoginUserView.as_view(), name="user-login"),
     path("user/me/", ManageUserView.as_view(), name="user-manage"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
