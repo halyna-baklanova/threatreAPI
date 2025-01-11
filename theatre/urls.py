@@ -15,11 +15,10 @@ router = routers.DefaultRouter()
 router.register("genres", GenreViewSet)
 router.register("actors", ActorViewSet)
 router.register("plays", PlayViewSet)
-
+router.register("theatre_halls", TheatreHallViewSet)
 router.register("performances", PerformanceViewSet)
 router.register("reservations", ReservationViewSet)
 router.register("tickets", TicketViewSet)
-router.register("theatre_halls", TheatreHallViewSet)
 
 urlpatterns = [path("", include(router.urls))]
 
