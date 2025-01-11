@@ -28,4 +28,4 @@ urlpatterns = [
     path("user/login/", LoginUserView.as_view(), name="token"),
     # path("user/login/", LoginUserView.as_view(), name="user-login"),
     path("user/me/", ManageUserView.as_view(), name="user-manage"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

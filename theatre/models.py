@@ -1,11 +1,21 @@
-from django.conf import settings
-from django.contrib.auth.models import AbstractUser
-from django.db import models
+import pathlib
+import uuid
 
+from django.conf import settings
+from django.utils.text import slugify
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+def actor_photo_path(instance: "Actor", filename: str) -> pathlib.Path:
+    extension = pathlib.Path(filename).suffix
+    filename = f"{slugify(instance.title)}-{uuid.uuid4()}" + extension
+    return pathlib.Path("uploads/actors/") / pathlib.Path(filename)
 
 class Actor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
+    photo = models.ImageField(null=True, blank=True, upload_to=actor_photo_path)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -18,11 +28,17 @@ class Genre(models.Model):
         return self.name
 
 
+def poster_path(instance: "Play", filename: str) -> pathlib.Path:
+    extension = pathlib.Path(filename).suffix
+    filename = f"{slugify(instance.title)}-{uuid.uuid4()}" + extension
+    return pathlib.Path("uploads/posters/") / pathlib.Path(filename)
+
 class Play(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     actors = models.ManyToManyField(Actor)
     genres = models.ManyToManyField(Genre)
+    poster = models.ImageField(null=True, blank=True, upload_to=poster_path)
 
     def __str__(self):
         return self.title
