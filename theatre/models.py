@@ -12,6 +12,7 @@ def actor_photo_path(instance: "Actor", filename: str) -> pathlib.Path:
     filename = f"{slugify(instance.last_name)}-{uuid.uuid4()}" + extension
     return pathlib.Path("uploads/actors/") / pathlib.Path(filename)
 
+
 class Actor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -32,6 +33,7 @@ def poster_path(instance: "Play", filename: str) -> pathlib.Path:
     extension = pathlib.Path(filename).suffix
     filename = f"{slugify(instance.title)}-{uuid.uuid4()}" + extension
     return pathlib.Path("uploads/posters/") / pathlib.Path(filename)
+
 
 class Play(models.Model):
     title = models.CharField(max_length=255)

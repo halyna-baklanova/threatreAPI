@@ -15,12 +15,7 @@ class IsAdminOrIfAuthenticatedReadOnly(BasePermission):
 
 class AllowListAndCreateOnly(BasePermission):
     def has_permission(self, request, view):
-        return bool(
-            (
-                request.method in SAFE_METHODS
-                or request.method == "POST"
-            )
-        )
+        return bool((request.method in SAFE_METHODS or request.method == "POST"))
 
 
 class AllowRetrieveOnly(BasePermission):
