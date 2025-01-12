@@ -82,11 +82,11 @@ class Reservation(models.Model):
     )
 
     def __str__(self):
-        return self.user.username
+        return str(self.created_at)
 
 
 class Ticket(models.Model):
-    rows = models.IntegerField()
+    row = models.IntegerField()
     seat = models.IntegerField()
     performance = models.ForeignKey(
         Performance,
@@ -100,4 +100,4 @@ class Ticket(models.Model):
     )
 
     def __str__(self):
-        return self.performance.play
+        return f"{self.performance}. Seat: {self.seat}, row: {self.row}"
