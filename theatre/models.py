@@ -5,9 +5,7 @@ from django.conf import settings
 from django.utils.text import slugify
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from rest_framework import status
+from django.core.exceptions import ValidationError
 
 
 def actor_photo_path(instance: "Actor", filename: str) -> pathlib.Path:
@@ -99,5 +97,28 @@ class Ticket(models.Model):
         related_name="tickets",
     )
 
+    def clean(self):
+        for ticket_attr_value, ticket_attr_name, theatre_hall_attr_name in [
+            (self.row, "row", "count_rows"),
+            (self.seat, "seat", "count_seats_in_row"),
+        ]:
+            count_attrs = getattr(
+                self.performance.theatre_hall, theatre_hall_attr_name
+            )
+            if not (1 <= ticket_attr_value <= count_attrs):
+                raise ValidationError(
+                    {
+                        ticket_attr_name: f"{ticket_attr_name} number "
+                        f"must be in available range: "
+                        f"(1, {theatre_hall_attr_name}): "
+                        f"(1, {count_attrs})"
+                    }
+                )
+
     def __str__(self):
-        return f"{self.performance}. Seat: {self.seat}, row: {self.row}"
+        return (
+            f"{str(self.performance)} (row: {self.row}, seat: {self.seat})"
+        )
+
+    class Meta:
+        unique_together = ("performance", "row", "seat")
