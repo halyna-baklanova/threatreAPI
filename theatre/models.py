@@ -5,6 +5,9 @@ from django.conf import settings
 from django.utils.text import slugify
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import status
 
 
 def actor_photo_path(instance: "Actor", filename: str) -> pathlib.Path:
@@ -38,8 +41,8 @@ def poster_path(instance: "Play", filename: str) -> pathlib.Path:
 class Play(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    actors = models.ManyToManyField(Actor)
-    genres = models.ManyToManyField(Genre)
+    actors = models.ManyToManyField(Actor, related_name="plays")
+    genres = models.ManyToManyField(Genre, related_name="plays")
     poster = models.ImageField(null=True, blank=True, upload_to=poster_path)
 
     def __str__(self):

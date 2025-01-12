@@ -14,6 +14,7 @@ from theatre.models import (
 )
 from theatre.serializers import (
     GenreSerializer,
+    GenreDetailSerializer,
     ActorSerializer,
     PlaySerializer,
     TheatreHallSerializer,
@@ -60,6 +61,12 @@ class GenreViewSet(viewsets.ModelViewSet):
         if self.action in ["list", "retrieve"]:
             return [AllowAny()]
         return [IsAdminUser()]
+
+    def get_serializer_class(self):
+        if self.action == "retrieve":
+            return GenreDetailSerializer
+
+        return GenreSerializer
 
 
 class PlayViewSet(viewsets.ModelViewSet):
