@@ -71,6 +71,9 @@ class TheatreHallSerializer(serializers.ModelSerializer):
 
 
 class PerformanceSerializer(serializers.ModelSerializer):
+    play = serializers.StringRelatedField()
+    theatre_hall = serializers.StringRelatedField()
+
     class Meta:
         model = Performance
         fields = ("id", "play", "theatre_hall", "show_time")
