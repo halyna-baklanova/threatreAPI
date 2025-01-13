@@ -105,3 +105,5 @@ After creating a user or superuser, you can log in via the `/api/user/login/` en
 
 ```bash
 Authorization: Bearer <your_access_token>
+
+![img.png](img.png)
