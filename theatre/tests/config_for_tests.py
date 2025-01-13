@@ -1,7 +1,13 @@
 from datetime import datetime
 
+from rest_framework.reverse import reverse
+
 from theatre.models import Play, Performance, TheatreHall, Reservation
 from user.models import User
+
+
+BASE_URL = reverse("theatre:play-list")
+DETAIL_URL = reverse("theatre:play-detail", kwargs={"pk": 1})
 
 
 def create_sample_theatre(**kwargs) -> TheatreHall:
