@@ -41,7 +41,7 @@ class AuthenticatedUserTest(TestCase):
         response = self.client.post(url, payload)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
-    def test_play_delete_forbidden(self):
+    def test_actor_delete_forbidden(self):
         actor = Actor.objects.create(
             first_name="Jason",
             last_name="Statham",

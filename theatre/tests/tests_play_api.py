@@ -6,7 +6,8 @@ from rest_framework.test import APIClient
 
 from theatre.models import Play, Actor, Genre
 from theatre.serializers import PlaySerializer
-from theatre.tests.config_for_tests import create_sample_plays
+from theatre.tests.config_for_tests import create_sample_plays, create_sample_performance, create_sample_theatre
+
 BASE_URL = reverse("theatre:play-list")
 
 class AuthenticatedUserTest(TestCase):
@@ -67,7 +68,6 @@ class AuthenticatedUserTest(TestCase):
             kwargs={"pk": play.pk}
         )
         response = self.client.delete(url)
-
         self.assertEqual(
             response.status_code,
             status.HTTP_403_FORBIDDEN
