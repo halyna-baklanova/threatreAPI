@@ -4,10 +4,13 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from theatre.models import Ticket, Reservation
+from theatre.models import Ticket
 from theatre.serializers import TicketSerializer
 
-from theatre.tests.config_for_tests import create_sample_performance, create_sample_theatre, create_sample_reservation
+from theatre.tests.config_for_tests import (
+    create_sample_performance,
+    create_sample_reservation
+)
 
 
 class AuthenticatedUserTest(TestCase):
@@ -93,7 +96,6 @@ class AuthenticatedUserTest(TestCase):
         response = self.client.post(url, payload)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
 
         ticket = Ticket.objects.first()
         self.assertEqual(ticket.row, 1)

@@ -15,10 +15,10 @@ def create_sample_theatre(**kwargs) -> TheatreHall:
         "name": "Test Theatre",
         "rows": 30,
         "seats_in_row": 30,
-
     }
     defaults.update(kwargs)
     return TheatreHall.objects.create(**defaults)
+
 
 def create_sample_plays(**kwargs) -> Play:
     defaults = {
@@ -28,6 +28,7 @@ def create_sample_plays(**kwargs) -> Play:
     defaults.update(kwargs)
     return Play.objects.create(**defaults)
 
+
 def create_sample_performance(**kwargs) -> Performance:
     defaults = {
         "play": create_sample_plays(),
@@ -36,6 +37,7 @@ def create_sample_performance(**kwargs) -> Performance:
     }
     defaults.update(kwargs)
     return Performance.objects.create(**defaults)
+
 
 def create_sample_reservation(**kwargs) -> Reservation:
     defaults = {

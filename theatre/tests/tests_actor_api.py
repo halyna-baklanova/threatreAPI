@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 from theatre.models import Actor
-from theatre.serializers import  ActorSerializer
+from theatre.serializers import ActorSerializer
 
 
 class AuthenticatedUserTest(TestCase):
@@ -16,8 +16,6 @@ class AuthenticatedUserTest(TestCase):
             password="test123",
         )
         self.client.force_authenticate(self.user)
-
-
 
     def test_actor_retrieve(self):
         actor = Actor.objects.create(

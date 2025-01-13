@@ -13,7 +13,10 @@ from theatre.tests.config_for_tests import (
 class UnauthenticatedUserTest(TestCase):
     def setUp(self):
         self.client = APIClient()
-        self.play = Play.objects.create(title="Sample Play", description="Sample description")
+        self.play = Play.objects.create(
+            title="Sample Play",
+            description="Sample description"
+        )
 
     def test_unauthenticated_user(self):
         response = self.client.get(BASE_URL)

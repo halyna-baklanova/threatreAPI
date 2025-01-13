@@ -4,11 +4,12 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
 
-from theatre.models import Play, Actor, Genre
+from theatre.models import Play
 from theatre.serializers import PlaySerializer
-from theatre.tests.config_for_tests import create_sample_plays, create_sample_performance, create_sample_theatre
+from theatre.tests.config_for_tests import create_sample_plays
 
 BASE_URL = reverse("theatre:play-list")
+
 
 class AuthenticatedUserTest(TestCase):
     def setUp(self):

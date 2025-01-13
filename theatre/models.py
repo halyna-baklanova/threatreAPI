@@ -4,7 +4,6 @@ import uuid
 from django.conf import settings
 from django.utils.text import slugify
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 
 
@@ -17,7 +16,10 @@ def actor_photo_path(instance: "Actor", filename: str) -> pathlib.Path:
 class Actor(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    photo = models.ImageField(null=True, blank=True, upload_to=actor_photo_path)
+    photo = models.ImageField(
+        null=True, blank=True,
+        upload_to=actor_photo_path
+    )
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
