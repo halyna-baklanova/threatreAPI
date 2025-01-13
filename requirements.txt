@@ -7,3 +7,5 @@ psycopg-binary==3.2.3
 PyJWT==2.10.1
 python-dotenv==1.0.1
 sqlparse==0.5.3
+
+drf-spectacular~=0.28.0
