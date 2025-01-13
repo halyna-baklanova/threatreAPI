@@ -7,7 +7,6 @@ This is a Django REST Framework project designed to handle the reservation of ti
 - **Show Management**: Add and manage shows, including show times and seat availability.
 - **Reservation System**: Allows users to reserve tickets for a show and automatically generates tickets.
 - **Ticket System**: Tickets are linked to a reservation and contain information about the seat and show.
-- **Availability Display**: View how many seats are still available for each show.
 - **JWT Authentication**: JSON Web Tokens (JWT) are used for secure authentication.
 - **API Documentation**: Auto-generated API documentation using Swagger.
 

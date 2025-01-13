@@ -3,9 +3,4 @@
 **__pycache__
 db.sqlite3
 
-.gitignore
-Dockerfile
-.dockerignore
-docker-compose.yml
-
 media/
